@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Heure à la seconde suivante</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    body {
+      margin: 50px;
+    }
+
+    .container {
+      max-width: 400px;
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: brown;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .btn-verifier {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      width: 100%;
+    }
+
+    .resultat {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Heure à la seconde suivante</h1>
+    <div class="form-group">
+      <label for="heureInput">Heure :</label>
+      <input type="number" class="form-control" id="heureInput" min="0" max="23" required>
+    </div>
+    <div class="form-group">
+      <label for="minutesInput">Minutes :</label>
+      <input type="number" class="form-control" id="minutesInput" min="0" max="59" required>
+    </div>
+    <div class="form-group">
+      <label for="secondesInput">Secondes :</label>
+      <input type="number" class="form-control" id="secondesInput" min="0" max="59" required>
+    </div>
+    <button type="button" class="btn btn-verifier" onclick="calculerHeureSuivante()">Vérifier</button>
+    <div id="resultat" class="resultat" style="display: none;"></div>
+  </div>
+
+  <script>
+    function calculerHeureSuivante() {
+      var heure = parseInt(document.getElementById('heureInput').value);
+      var minutes = parseInt(document.getElementById('minutesInput').value);
+      var secondes = parseInt(document.getElementById('secondesInput').value);
+
+      secondes++;
+
+      if (secondes === 60) {
+        secondes = 0;
+        minutes++;
+        if (minutes === 60) {
+          minutes = 0;
+          heure++;
+          if (heure === 24) {
+            heure = 0;
+          }
+        }
+      }
+
+      var resultat = document.getElementById('resultat');
+      resultat.innerHTML = "L'heure à la seconde suivante est : " + heure + "h" + minutes + "min" + secondes + "sec.";
+      resultat.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
